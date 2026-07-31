@@ -1,8 +1,10 @@
-// 643. Maximum Average Subarray I
-// https://leetcode.com/problems/maximum-average-subarray-i/description/
-// Runtime: 3ms Beats 59.79%
-// Easy
-// TC: O(n)
+/*
+* 643. Maximum Average Subarray I
+* https://leetcode.com/problems/maximum-average-subarray-i/description/
+
+    * Runtime: 3ms Beats 59.79%
+    * Easy
+    * TC: O(n)
 
 public class Solution {
     public double FindMaxAverage(int[] nums, int k) {
@@ -28,6 +30,43 @@ public class Solution {
         }
 
         return max;
+
+    }
+}
+*/
+
+
+/*
+    * Runtime: 2ms Beats 100.00%
+    * Memory: 59.90 MB Beats 81.76%
+    * Easy
+*/    
+
+public class Solution {
+    public double FindMaxAverage(int[] nums, int k) {
+        int ptr = 0;
+        int i;
+        
+        int total = 0;
+
+        for(i = 0; i<k; i++) {
+            total = nums[i] + total;
+        } 
+
+        int subTotal = total;
+
+        for(int j = i; j<nums.Length; j++) {
+            subTotal = subTotal - nums[ptr];
+            ptr++;
+
+            subTotal = subTotal + nums[j];
+
+            if(subTotal > total) {
+                total = subTotal;
+            }
+        }
+
+        return (double) total/k;
 
     }
 }
